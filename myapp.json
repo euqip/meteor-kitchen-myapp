@@ -1,0 +1,1097 @@
+{
+	"application": {
+		"title": "_myapp",
+		"theme": "bootswatch-united",
+		"roles": [
+			"admin",
+			"user",
+			"operator",
+			"teamleader",
+			"office",
+			"appadmin"
+		],
+		"default_role": "user",
+		"send_verification_email": true,
+		"collections": [
+			{
+				"name": "organisations",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "orgname",
+						"title": "_organisation",
+						"type": "string",
+						"required": true,
+						"exportable": true
+					},
+					{
+						"name": "address",
+						"title": "_address",
+						"type": "string",
+						"input_items": [
+							{
+								"value": "streetname",
+								"title": "_streetname"
+							},
+							{
+								"value": "number",
+								"title": "_number"
+							},
+							{
+								"value": "zip",
+								"title": "_zip"
+							},
+							{
+								"value": "city",
+								"title": "_city"
+							},
+							{
+								"value": "state",
+								"title": "_state"
+							},
+							{
+								"value": "country",
+								"title": "_country"
+							}
+						]
+					},
+					{
+						"name": "shortname",
+						"title": "_shortname",
+						"type": "string",
+						"required": true,
+						"exportable": true
+					},
+					{
+						"name": "language",
+						"title": "_language",
+						"type": "string",
+						"default": "en"
+					},
+					{
+						"name": "email",
+						"title": "_email",
+						"type": "string"
+					}
+				],
+				"owner_field": "createdBy",
+				"roles_allowed_to_read": [
+					"user"
+				],
+				"roles_allowed_to_insert": [
+					"admin"
+				],
+				"roles_allowed_to_update": [
+					"admin"
+				],
+				"roles_allowed_to_delete": [
+					"admin"
+				],
+				"roles_allowed_to_download": [
+					"admin"
+				]
+			},
+			{
+				"name": "resources",
+				"type": "collection",
+				"owner_field": "createdBy",
+				"roles_allowed_to_read": [
+					"user"
+				]
+			},
+			{
+				"name": "assetscat",
+				"type": "collection",
+				"owner_field": "createdBy",
+				"fields": [
+					{
+						"name": "catname",
+						"title": "_catname",
+						"type": "string",
+						"required": true
+					}
+				]
+			},
+			{
+				"name": "params",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "category",
+						"title": "_category",
+						"type": "string",
+						"required": true
+					},
+					{
+						"name": "content",
+						"title": "_content",
+						"type": "array",
+						"required": true
+					},
+					{
+						"name": "active",
+						"title": "_active",
+						"type": "bool",
+						"default": "true",
+						"required": true
+					}
+				],
+				"owner_field": "createdBy",
+				"roles_allowed_to_read": [
+					"user"
+				],
+				"roles_allowed_to_insert": [
+					"admin"
+				],
+				"roles_allowed_to_update": [
+					"admin"
+				],
+				"roles_allowed_to_delete": [
+					"nobody"
+				],
+				"roles_allowed_to_download": [
+					"admin"
+				]
+			},
+			{
+				"name": "tasks",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "taskname",
+						"title": "_taskname",
+						"type": "string",
+						"required": true
+					},
+					{
+						"name": "taskdescr",
+						"title": "_taskdescription",
+						"type": "string",
+						"required": true,
+						"searchable": false,
+						"sortable": false,
+						"input": "textarea"
+					},
+					{
+						"name": "cration",
+						"title": "_creationdate",
+						"type": "date",
+						"input": "datepicker"
+					},
+					{
+						"name": "due",
+						"title": "_duedate",
+						"type": "date",
+						"input": "datepicker"
+					},
+					{
+						"name": "recurrent",
+						"title": "_reccurent",
+						"type": "bool",
+						"input": "checkbox"
+					},
+					{
+						"name": "period",
+						"title": "period",
+						"type": "integer"
+					},
+					{
+						"name": "periodunit",
+						"title": "_periodunit",
+						"type": "string"
+					},
+					{
+						"name": "execution",
+						"title": "_execution",
+						"type": "date",
+						"default": "today",
+						"input": "datepicker"
+					},
+					{
+						"name": "execBy",
+						"title": "_execby",
+						"type": "string"
+					},
+					{
+						"name": "respteam",
+						"title": "_respteam",
+						"type": "string"
+					},
+					{
+						"name": "status",
+						"title": "_status",
+						"type": "string",
+						"default": "created",
+						"required": true,
+						"exportable": true,
+						"input": "select"
+					}
+				],
+				"roles_allowed_to_read": [
+					"user"
+				],
+				"roles_allowed_to_insert": [
+					"office"
+				],
+				"roles_allowed_to_update": [
+					"teamleader"
+				],
+				"roles_allowed_to_delete": [
+					"nobody"
+				],
+				"roles_allowed_to_download": [
+					"user"
+				]
+			}
+		],
+		"queries": [
+			{
+				"name": "admin_users",
+				"collection": "users"
+			},
+			{
+				"name": "admin_user",
+				"collection": "users",
+				"filter": {
+					"_id": ":userId"
+				},
+				"find_one": true
+			},
+			{
+				"name": "users_null",
+				"collection": "users",
+				"filter": {
+					"_id": null
+				},
+				"find_one": true
+			},
+			{
+				"name": "current_user_data",
+				"collection": "users",
+				"filter": {
+					"_id": "Meteor.userId()"
+				},
+				"find_one": true
+			},
+			{
+				"name": "organisations_null",
+				"collection": "organisations",
+				"filter": {
+					"_id": null
+				},
+				"find_one": true
+			},
+			{
+				"name": "orgs_list",
+				"collection": "organisations"
+			},
+			{
+				"name": "admin_organisation",
+				"collection": "organisations",
+				"find_one": true,
+				"filter": {
+					"_id": ":organisationId"
+				}
+			},
+			{
+				"name": "admin_organisations",
+				"collection": "organisations"
+			},
+			{
+				"name": "admin_params",
+				"collection": "params"
+			},
+			{
+				"name": "admin_param",
+				"collection": "params",
+				"find_one": true,
+				"filter": {
+					"_id": ":paramId"
+				}
+			},
+			{
+				"name": "params_null",
+				"collection": "params",
+				"find_one": true,
+				"filter": {
+					"_id": null
+				}
+			}
+		],
+		"public_zone": {
+			"pages": [
+				{
+					"name": "home_public",
+					"components": [
+						{
+							"name": "home_jumbotron",
+							"title": "Example application",
+							"type": "jumbotron",
+							"text": "<b>This is example application built with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">meteor-kitchen</a> code generator without manual coding.</b><br />It demonstrates simple application with user account system and admin panel.<br />Source code (input file for generator) is <a href=\"https://github.com/perak/kitchen-examples/tree/master/example-admin\" target=\"_blank\">here</a>.",
+							"button_title": "Continue &raquo;",
+							"button_route": "login"
+						}
+					],
+					"type": "page"
+				},
+				{
+					"name": "login",
+					"template": "login",
+					"type": "page"
+				},
+				{
+					"name": "register",
+					"template": "register",
+					"type": "page"
+				},
+				{
+					"name": "verify_email",
+					"template": "verify_email",
+					"route_params": [
+						"verifyEmailToken"
+					],
+					"type": "page"
+				},
+				{
+					"name": "forgot_password",
+					"template": "forgot_password",
+					"type": "page"
+				},
+				{
+					"name": "reset_password",
+					"template": "reset_password",
+					"route_params": [
+						"resetPasswordToken"
+					],
+					"type": "page"
+				}
+			],
+			"components": [
+				{
+					"name": "left_menu",
+					"type": "menu",
+					"class": "nav navbar-nav",
+					"dest_selector": "#menu",
+					"items": [
+						{
+							"title": "Home",
+							"route": "home_public"
+						}
+					]
+				},
+				{
+					"name": "right_menu",
+					"type": "menu",
+					"class": "nav navbar-nav navbar-right",
+					"dest_selector": "#menu",
+					"items": [
+						{
+							"title": "_register",
+							"route": "register"
+						},
+						{
+							"title": "_login",
+							"route": "login"
+						}
+					]
+				}
+			],
+			"type": "zone"
+		},
+		"private_zone": {
+			"pages": [
+				{
+					"name": "home_private",
+					"title": "_welcome {{userFullName}}!",
+					"type": "page"
+				},
+				{
+					"name": "admin",
+					"roles": [
+						"admin"
+					],
+					"pages": [
+						{
+							"name": "users",
+							"components": [
+								{
+									"name": "view",
+									"type": "data_view",
+									"title": "_users",
+									"text_if_empty": "No users yet",
+									"query_name": "admin_users",
+									"fields": [
+										{
+											"name": "profile.name",
+											"title": "_name",
+											"type": "string"
+										},
+										{
+											"name": "profile.email",
+											"title": "_email",
+											"type": "string"
+										},
+										{
+											"name": "roles",
+											"title": "_role",
+											"type": "string"
+										}
+									],
+									"insert_route": "admin.users.insert",
+									"edit_route": "admin.users.edit",
+									"edit_route_params": [
+										{
+											"name": "userId",
+											"value": "this._id"
+										}
+									],
+									"details_route": "admin.users.details",
+									"details_route_params": [
+										{
+											"name": "userId",
+											"value": "this._id"
+										}
+									]
+								}
+							],
+							"pages": [
+								{
+									"name": "details",
+									"route_params": [
+										"userId"
+									],
+									"components": [
+										{
+											"name": "details_form",
+											"type": "form",
+											"mode": "read_only",
+											"title": "_userdetails",
+											"query_name": "admin_user",
+											"fields": [
+												{
+													"name": "profile.name",
+													"title": "_name",
+													"type": "string"
+												},
+												{
+													"name": "profile.email",
+													"title": "_email",
+													"type": "email"
+												},
+												{
+													"name": "roles",
+													"title": "_role",
+													"type": "string"
+												}
+											],
+											"close_route": "admin.users",
+											"back_route": "admin.users"
+										}
+									],
+									"type": "page"
+								},
+								{
+									"name": "insert",
+									"components": [
+										{
+											"name": "insert_form",
+											"type": "form",
+											"mode": "insert",
+											"title": "_addnewuser",
+											"submit_route": "admin.users",
+											"cancel_route": "admin.users",
+											"query_name": "users_null",
+											"fields": [
+												{
+													"name": "profile.name",
+													"title": "_name",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "profile.email",
+													"title": "_email",
+													"type": "email",
+													"required": true
+												},
+												{
+													"name": "password",
+													"title": "_password",
+													"input": "password",
+													"required": true,
+													"type": "string"
+												}
+											]
+										}
+									],
+									"type": "page"
+								},
+								{
+									"name": "edit",
+									"route_params": [
+										"userId"
+									],
+									"components": [
+										{
+											"name": "edit_form",
+											"type": "form",
+											"mode": "update",
+											"title": "_edituser",
+											"submit_route": "admin.users",
+											"cancel_route": "admin.users",
+											"query_name": "admin_user",
+											"fields": [
+												{
+													"name": "profile.name",
+													"title": "_name",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "profile.email",
+													"title": "_email",
+													"type": "email",
+													"required": true
+												},
+												{
+													"name": "roles",
+													"type": "array",
+													"title": "_role",
+													"input": "radio",
+													"input_items": [
+														{
+															"value": "user",
+															"title": "_user"
+														},
+														{
+															"value": "admin",
+															"title": "_admin"
+														},
+														{
+															"value": "blocked",
+															"title": "_blocked"
+														}
+													]
+												}
+											]
+										}
+									],
+									"type": "page"
+								}
+							],
+							"type": "page"
+						},
+						{
+							"name": "params",
+							"components": [
+								{
+									"name": "view",
+									"type": "data_view",
+									"title": "_params",
+									"text_if_empty": "No params yet defined",
+									"query_name": "admin_params",
+									"fields": [
+										{
+											"name": "category",
+											"title": "_category",
+											"type": "string",
+											"required": true
+										},
+										{
+											"name": "active",
+											"title": "_active",
+											"type": "bool",
+											"default": "true",
+											"required": true,
+											"searchable": false,
+											"sortable": false,
+											"input": "checkbox"
+										},
+										{
+											"name": "content",
+											"title": "_content",
+											"type": "string",
+											"required": true
+										}
+									],
+									"insert_route": "admin.params.insert",
+									"edit_route": "admin.params.edit",
+									"edit_route_params": [
+										{
+											"name": "paramId",
+											"value": "this._id"
+										}
+									],
+									"details_route": "admin.params.details",
+									"details_route_params": [
+										{
+											"name": "paramId",
+											"value": "this._id"
+										}
+									]
+								}
+							],
+							"pages": [
+								{
+									"name": "details",
+									"route_params": [
+										"paramId"
+									],
+									"components": [
+										{
+											"name": "details_form",
+											"type": "form",
+											"mode": "read_only",
+											"title": "_paramdetails",
+											"query_name": "admin_param",
+											"fields": [
+												{
+													"name": "category",
+													"title": "_category",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "active",
+													"title": "_active",
+													"required": true,
+													"type": "boolean",
+													"default": true,
+													"input": "checkbox"
+												},
+												{
+													"name": "content",
+													"title": "_content",
+													"required": true,
+													"type": "string"
+												}
+											],
+											"close_route": "admin.params",
+											"back_route": "admin.params"
+										}
+									],
+									"type": "page"
+								},
+								{
+									"name": "insert",
+									"components": [
+										{
+											"name": "insert_form",
+											"type": "form",
+											"mode": "insert",
+											"title": "_addnewparam",
+											"submit_route": "admin.params",
+											"cancel_route": "admin.params",
+											"query_name": "params_null",
+											"fields": [
+												{
+													"name": "category",
+													"title": "_category",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "active",
+													"title": "_active",
+													"required": true,
+													"type": "boolean",
+													"default": true,
+													"input": "checkbox"
+												},
+												{
+													"name": "content",
+													"title": "_content",
+													"required": true,
+													"type": "string"
+												}
+											]
+										}
+									],
+									"type": "page"
+								},
+								{
+									"name": "edit",
+									"route_params": [
+										"paramId"
+									],
+									"components": [
+										{
+											"name": "edit_form",
+											"type": "form",
+											"mode": "update",
+											"title": "_editparam",
+											"submit_route": "admin.params",
+											"cancel_route": "admin.params",
+											"query_name": "admin_param",
+											"fields": [
+												{
+													"name": "category",
+													"title": "_category",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "active",
+													"title": "_active",
+													"required": true,
+													"type": "boolean",
+													"default": true,
+													"input": "checkbox"
+												},
+												{
+													"name": "content",
+													"title": "_content",
+													"required": true,
+													"type": "string"
+												}
+											]
+										}
+									],
+									"type": "page"
+								}
+							],
+							"type": "page"
+						},
+						{
+							"name": "organisations",
+							"components": [
+								{
+									"name": "view",
+									"type": "data_view",
+									"title": "_organisations",
+									"text_if_empty": "No organisations yet defined",
+									"query_name": "admin_organisations",
+									"fields": [
+										{
+											"name": "orgname",
+											"title": "_name",
+											"type": "string"
+										},
+										{
+											"name": "shortname",
+											"title": "_shortname",
+											"type": "string"
+										},
+										{
+											"name": "language",
+											"title": "_language",
+											"type": "string"
+										},
+										{
+											"name": "email",
+											"title": "_email",
+											"type": "string"
+										}
+									],
+									"insert_route": "admin.organisations.insert",
+									"edit_route": "admin.organisations.edit",
+									"edit_route_params": [
+										{
+											"name": "organisationId",
+											"value": "this._id"
+										}
+									],
+									"details_route": "admin.organisations.details",
+									"details_route_params": [
+										{
+											"name": "organisationId",
+											"value": "this._id"
+										}
+									]
+								}
+							],
+							"pages": [
+								{
+									"name": "details",
+									"route_params": [
+										"organisationId"
+									],
+									"components": [
+										{
+											"name": "details_form",
+											"type": "form",
+											"mode": "read_only",
+											"title": "organisation details",
+											"query_name": "admin_organisation",
+											"fields": [
+												{
+													"name": "orgname",
+													"title": "_name",
+													"type": "string"
+												},
+												{
+													"name": "shortname",
+													"title": "_shortname",
+													"type": "string"
+												},
+												{
+													"name": "language",
+													"title": "_language",
+													"type": "string"
+												},
+												{
+													"name": "email",
+													"title": "_email",
+													"type": "email"
+												}
+											],
+											"close_route": "admin.organisations",
+											"back_route": "admin.organisations"
+										}
+									],
+									"type": "page"
+								},
+								{
+									"name": "insert",
+									"components": [
+										{
+											"name": "insert_form",
+											"type": "form",
+											"mode": "insert",
+											"title": "Add new organisation",
+											"submit_route": "admin.organisations",
+											"cancel_route": "admin.organisations",
+											"query_name": "organisations_null",
+											"fields": [
+												{
+													"name": "orgname",
+													"title": "_name",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "shortname",
+													"title": "_shortname",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "language",
+													"title": "_language",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "email",
+													"title": "_email",
+													"type": "email",
+													"required": true
+												}
+											]
+										}
+									],
+									"type": "page"
+								},
+								{
+									"name": "edit",
+									"route_params": [
+										"organisationId"
+									],
+									"components": [
+										{
+											"name": "edit_form",
+											"type": "form",
+											"mode": "update",
+											"title": "Edit organisation",
+											"submit_route": "admin.organisations",
+											"cancel_route": "admin.organisations",
+											"query_name": "admin_organisation",
+											"fields": [
+												{
+													"name": "orgname",
+													"title": "_name",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "shortname",
+													"title": "_shortname",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "language",
+													"title": "_language",
+													"required": true,
+													"type": "string"
+												},
+												{
+													"name": "email",
+													"title": "_email",
+													"type": "email",
+													"required": true
+												}
+											]
+										}
+									],
+									"type": "page"
+								}
+							],
+							"type": "page"
+						}
+					],
+					"components": [
+						{
+							"name": "side_menu",
+							"type": "menu",
+							"class": "nav nav-stacked nav-pills",
+							"items": [
+								{
+									"title": "_users",
+									"route": "admin.users"
+								},
+								{
+									"title": "_organisations",
+									"route": "admin.organisations"
+								},
+								{
+									"title": "_params",
+									"route": "admin.params"
+								}
+							]
+						}
+					],
+					"type": "page",
+					"title": "_appmanagement"
+				},
+				{
+					"name": "user_settings",
+					"roles": [
+						"user",
+						"admin"
+					],
+					"pages": [
+						{
+							"name": "profile",
+							"components": [
+								{
+									"name": "edit_form",
+									"type": "form",
+									"mode": "update",
+									"title": "_editprofile",
+									"submit_route": "user_settings.profile",
+									"query_name": "current_user_data",
+									"fields": [
+										{
+											"name": "profile.name",
+											"title": "_name",
+											"required": true,
+											"type": "string"
+										},
+										{
+											"name": "profile.email",
+											"title": "_email",
+											"type": "email",
+											"required": true
+										}
+									]
+								}
+							],
+							"type": "page"
+						},
+						{
+							"name": "change_pass",
+							"template": "change_pass",
+							"type": "page"
+						}
+					],
+					"components": [
+						{
+							"name": "side_menu",
+							"type": "menu",
+							"class": "nav nav-stacked nav-pills",
+							"items": [
+								{
+									"title": "_profile",
+									"route": "user_settings.profile"
+								},
+								{
+									"title": "_changepassword",
+									"route": "user_settings.change_pass"
+								}
+							]
+						}
+					],
+					"type": "page"
+				},
+				{
+					"name": "logout",
+					"template": "logout",
+					"type": "page"
+				}
+			],
+			"components": [
+				{
+					"name": "left_menu",
+					"type": "menu",
+					"class": "nav navbar-nav",
+					"dest_selector": "#menu",
+					"items": [
+						{
+							"title": "_home",
+							"route": "home_private",
+							"icon_class": "fa fa-home"
+						},
+						{
+							"title": "_assets",
+							"route": "assets_buildings"
+						}
+					]
+				},
+				{
+					"name": "right_menu",
+					"type": "menu",
+					"class": "nav navbar-nav navbar-right",
+					"dest_selector": "#menu",
+					"items": [
+						{
+							"title": "_admin",
+							"route": "admin",
+							"icon_class": "fa fa-wrench"
+						},
+						{
+							"title": "{{userEmail}}",
+							"items": [
+								{
+									"title": "_settings",
+									"route": "user_settings"
+								},
+								{
+									"title": "_logout",
+									"route": "logout"
+								}
+							],
+							"icon_class": "fa fa-cog"
+						}
+					]
+				}
+			],
+			"type": "zone"
+		},
+		"free_zone": {
+			"type": "zone"
+		},
+		"packages": {
+			"meteor": [
+				"tap:i18n",
+				"tap:i18n-ui",
+				"tap:i18n-db",
+				"gwendall:autoform-i18n",
+				"gwendall:simple-schema-i18n",
+				"themeteorchef:bert"
+			]
+		},
+		"meta_title": "AssetsManagement",
+		"footer_text": "_footertext",
+		"use_collection2": true,
+		"server_startup_code": "    //first run, create base application data\n\n\t// from https://www.youtube.com/watch?v=nkDBnoiLQC0 at 4:14\n    // from https://www.youtube.com/watch?v=nkDBnoiLQC0 at 4:14\n    // create users with roles\n    if(Meteor.users.find().count() ===0){\n        var users = [\n\t\t{name:'admin', email:'admin@example.com', password: 'admin', roles:['user','admin']}\n\t\t,{name:'simpleuser', email:'simpleuser@example.com', password: 'user', roles:['user']}\n    \t\t,{name:'bp', email:'euqip@github.com', password: 'bp', roles:['user','admin']}\n    \t];\n\t    _.each(users, function (user){\n    \t\tconsole.log (\"create users___\"+user.email);\n\t    \tvar userid= Accounts.createUser({\n\t    \t\temail: user.email\n\t    \t\t,password: user.password\n\t    \t\t,username: user.email\n\t    \t\t,profile:{name: user.name}\n\t    \t})\n\t    \tMeteor.users.update({_id:userid},{$set:{'emails.0.verified':true}});\n\t    \tMeteor.users.update({_id:userid},{$set:{'roles':user.roles}});\n\t    \t//Roles.addUsersToRoles(userid, user.roles);\n\t    })\n    }\n    if(Organisations.find().count() <2){\n    \tvar items = [\n    \t\t{orgname:'asset Management', email:'info@assetmgnt.com', shortname: 'assetmgnt'}\n    \t\t,{orgname:'Dummy company', email:'info@dummy.com', shortname: 'dummy'}\n    \t];\n\t    _.each(items, function (item){\n    \t\tconsole.log (\"create orgs___\"+item);\n\t    \tvar itemid= Organisations.insert(item)\n\t    })\n    }\n\n    if(Assetscat.find().count() ===0){\n    \tvar items = [\n    \t\t{catname:'buildings'}\n    \t\t,{catname:'parks'}\n    \t\t,{catname:'cars'}\n    \t\t,{catname:'machines'}\n    \t\t,{catname:'streets'}\n    \t];\n\t    _.each(items, function (item){\n    \t\tconsole.log (\"create cats___\"+item);\n\t    \tvar itemid= Assetscat.insert(item)\n\t    })\n\t}\n    if(Params.find().count() ===0){\n    \tvar items = [\n    \t\t{category:'status', active: true, content:['created', 'rejected', 'accepted', 'assigned', 'performed', 'archived']}\n    \t\t,{category:'sources', active: true, content:['fax', 'phone', 'betterstreet', 'internal', 'letter', 'other']}\n    \t];\n\t    _.each(items, function (item){\n    \t\tconsole.log (\"create params\"+item);\n\t    \tvar itemid= Params.insert(item)\n\t    })\n\t}\n",
+		"server_side_routes": [
+			{
+				"name": "assets_list"
+			},
+			{
+				"name": "orgs_list"
+			}
+		]
+	}
+}
