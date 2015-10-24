@@ -7,7 +7,8 @@ Meteor kitchen builds a Meteor app with some collections
 - build the meteor app with this command line (replace 'myapp' by your own file name)
     -    meteor-kitchen myapp.json ./myapp
 - go to directory by typing: cd myapp
-- type meteor open browser at localhost:3000 to start application
+- type meteor
+- open browser at localhost:3000 to start application
 
 - default admin: UID: admin@example.com / PWD: admin
 - default user: UID: simpleuser@example.com / PWD: user
