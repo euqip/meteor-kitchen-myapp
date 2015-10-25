@@ -1,6 +1,6 @@
 {
 	"application": {
-		"title": "_myapp",
+		"title": "{{_ 'myapp'}}",
 		"theme": "bootswatch-united",
 		"roles": [
 			"admin",
@@ -19,58 +19,58 @@
 				"fields": [
 					{
 						"name": "orgname",
-						"title": "_organisation",
+						"title": "{{_ 'organisation'}}",
 						"type": "string",
 						"required": true,
 						"exportable": true
 					},
 					{
 						"name": "address",
-						"title": "_address",
+						"title": "{{_ 'address'}}",
 						"type": "string",
 						"input_items": [
 							{
 								"value": "streetname",
-								"title": "_streetname"
+								"title": "{{_ 'streetname'}}"
 							},
 							{
 								"value": "number",
-								"title": "_number"
+								"title": "{{_ 'number'}}"
 							},
 							{
 								"value": "zip",
-								"title": "_zip"
+								"title": "{{_ 'zip'}}"
 							},
 							{
 								"value": "city",
-								"title": "_city"
+								"title": "{{_ 'city'}}"
 							},
 							{
 								"value": "state",
-								"title": "_state"
+								"title": "{{_ 'state'}}"
 							},
 							{
 								"value": "country",
-								"title": "_country"
+								"title": "{{_ 'country'}}"
 							}
 						]
 					},
 					{
 						"name": "shortname",
-						"title": "_shortname",
+						"title": "{{_ 'shortname'}}",
 						"type": "string",
 						"required": true,
 						"exportable": true
 					},
 					{
 						"name": "language",
-						"title": "_language",
+						"title": "{{_ 'language'}}",
 						"type": "string",
 						"default": "en"
 					},
 					{
 						"name": "email",
-						"title": "_email",
+						"title": "{{_ 'email'}}",
 						"type": "string"
 					}
 				],
@@ -118,19 +118,19 @@
 				"fields": [
 					{
 						"name": "category",
-						"title": "_category",
+						"title": "{{_ 'category'}}",
 						"type": "string",
 						"required": true
 					},
 					{
 						"name": "content",
-						"title": "_content",
+						"title": "{{_ 'content'}}",
 						"type": "array",
 						"required": true
 					},
 					{
 						"name": "active",
-						"title": "_active",
+						"title": "{{_ 'active'}}",
 						"type": "bool",
 						"default": "true",
 						"required": true
@@ -242,6 +242,54 @@
 				"roles_allowed_to_download": [
 					"user"
 				]
+			},
+			{
+				"name": "theassets",
+				"type": "collection",
+				"fields": [
+					{
+						"name": "category",
+						"title": "{{_ 'category'}}",
+						"type": "string",
+						"required": true,
+						"default": "building",
+						"exportable": true
+					},
+					{
+						"name": "name",
+						"title": "{{_ 'name'}}",
+						"type": "string",
+						"required": true,
+						"exportable": true
+					},
+					{
+						"name": "pn",
+						"title": "{{_ 'pn'}}",
+						"type": "string",
+						"exportable": true
+					},
+					{
+						"name": "sn",
+						"title": "{{_ 'sn'}}",
+						"type": "string",
+						"exportable": true
+					}
+				],
+				"roles_allowed_to_read": [
+					"user"
+				],
+				"roles_allowed_to_insert": [
+					"office"
+				],
+				"roles_allowed_to_update": [
+					"teamleader"
+				],
+				"roles_allowed_to_delete": [
+					"nobody"
+				],
+				"roles_allowed_to_download": [
+					"user"
+				]
 			}
 		],
 		"queries": [
@@ -282,15 +330,11 @@
 				"find_one": true
 			},
 			{
-				"name": "orgs_list",
-				"collection": "organisations"
-			},
-			{
 				"name": "admin_organisation",
 				"collection": "organisations",
 				"find_one": true,
 				"filter": {
-					"_id": ":organisationId"
+					"_id": "organisationId"
 				}
 			},
 			{
@@ -315,6 +359,18 @@
 				"find_one": true,
 				"filter": {
 					"_id": null
+				}
+			},
+			{
+				"name": "theassetsslist",
+				"collection": "theassets"
+			},
+			{
+				"name": "thaeasset",
+				"collection": "theassets",
+				"find_one": true,
+				"filter": {
+					"_id": "assetId"
 				}
 			}
 		],
@@ -374,7 +430,7 @@
 					"dest_selector": "#menu",
 					"items": [
 						{
-							"title": "Home",
+							"title": "{{_ 'home'}}",
 							"route": "home_public"
 						}
 					]
@@ -386,11 +442,11 @@
 					"dest_selector": "#menu",
 					"items": [
 						{
-							"title": "_register",
+							"title": "{{_ 'register'}}",
 							"route": "register"
 						},
 						{
-							"title": "_login",
+							"title": "{{_ 'login'}}",
 							"route": "login"
 						}
 					]
@@ -402,7 +458,7 @@
 			"pages": [
 				{
 					"name": "home_private",
-					"title": "_welcome {{userFullName}}!",
+					"title": "{{_ 'welcome'}}  {{userFullName}}! {{> i18n_dropdown}}",
 					"type": "page"
 				},
 				{
@@ -937,15 +993,15 @@
 							"class": "nav nav-stacked nav-pills",
 							"items": [
 								{
-									"title": "_users",
+									"title": "{{_ 'users'}}",
 									"route": "admin.users"
 								},
 								{
-									"title": "_organisations",
+									"title": "{{_ 'organisations'}}",
 									"route": "admin.organisations"
 								},
 								{
-									"title": "_params",
+									"title": "{{_ 'params'}}",
 									"route": "admin.params"
 								}
 							]
@@ -1018,6 +1074,32 @@
 					"name": "logout",
 					"template": "logout",
 					"type": "page"
+				},
+				{
+					"name": "assets",
+					"type": "page",
+					"title": "_assets management",
+					"query_name": "theassetsslist",
+					"components": [
+						{
+							"name": "view",
+							"query_name": "theassetsslist",
+							"text_if_empty": "No asset here",
+							"details_route": "assets",
+							"type": "data_view"
+						}
+					],
+					"close_route": "home_private",
+					"roles": [
+						"user"
+					],
+					"pages": [
+						{
+							"name": "details",
+							"title": "{{name}} details",
+							"type": "page"
+						}
+					]
 				}
 			],
 			"components": [
@@ -1028,13 +1110,14 @@
 					"dest_selector": "#menu",
 					"items": [
 						{
-							"title": "_home",
+							"title": "{{_ 'home'}}",
 							"route": "home_private",
 							"icon_class": "fa fa-home"
 						},
 						{
-							"title": "_assets",
-							"route": "assets_buildings"
+							"title": "{{_ 'assets'}}",
+							"route": "assets",
+							"icon_class": "fa fa-building"
 						}
 					]
 				},
@@ -1045,7 +1128,7 @@
 					"dest_selector": "#menu",
 					"items": [
 						{
-							"title": "_admin",
+							"title": "{{_ '_admin'}}",
 							"route": "admin",
 							"icon_class": "fa fa-wrench"
 						},
@@ -1053,11 +1136,11 @@
 							"title": "{{userEmail}}",
 							"items": [
 								{
-									"title": "_settings",
+									"title": "{{_ 'settings'}}",
 									"route": "user_settings"
 								},
 								{
-									"title": "_logout",
+									"title": "{{_ 'logout'}}",
 									"route": "logout"
 								}
 							],
@@ -1082,9 +1165,9 @@
 			]
 		},
 		"meta_title": "AssetsManagement",
-		"footer_text": "_footertext",
+		"footer_text": "{{_ 'footertext'}}",
 		"use_collection2": true,
-		"server_startup_code": "    //first run, create base application data\n\n\t// from https://www.youtube.com/watch?v=nkDBnoiLQC0 at 4:14\n    // from https://www.youtube.com/watch?v=nkDBnoiLQC0 at 4:14\n    // create users with roles\n    if(Meteor.users.find().count() ===0){\n        var users = [\n\t\t{name:'admin', email:'admin@example.com', password: 'admin', roles:['user','admin']}\n\t\t,{name:'simpleuser', email:'simpleuser@example.com', password: 'user', roles:['user']}\n    \t\t,{name:'bp', email:'euqip@github.com', password: 'bp', roles:['user','admin']}\n    \t];\n\t    _.each(users, function (user){\n    \t\tconsole.log (\"create users___\"+user.email);\n\t    \tvar userid= Accounts.createUser({\n\t    \t\temail: user.email\n\t    \t\t,password: user.password\n\t    \t\t,username: user.email\n\t    \t\t,profile:{name: user.name}\n\t    \t})\n\t    \tMeteor.users.update({_id:userid},{$set:{'emails.0.verified':true}});\n\t    \tMeteor.users.update({_id:userid},{$set:{'roles':user.roles}});\n\t    \t//Roles.addUsersToRoles(userid, user.roles);\n\t    })\n    }\n    if(Organisations.find().count() <2){\n    \tvar items = [\n    \t\t{orgname:'asset Management', email:'info@assetmgnt.com', shortname: 'assetmgnt'}\n    \t\t,{orgname:'Dummy company', email:'info@dummy.com', shortname: 'dummy'}\n    \t];\n\t    _.each(items, function (item){\n    \t\tconsole.log (\"create orgs___\"+item);\n\t    \tvar itemid= Organisations.insert(item)\n\t    })\n    }\n\n    if(Assetscat.find().count() ===0){\n    \tvar items = [\n    \t\t{catname:'buildings'}\n    \t\t,{catname:'parks'}\n    \t\t,{catname:'cars'}\n    \t\t,{catname:'machines'}\n    \t\t,{catname:'streets'}\n    \t];\n\t    _.each(items, function (item){\n    \t\tconsole.log (\"create cats___\"+item);\n\t    \tvar itemid= Assetscat.insert(item)\n\t    })\n\t}\n    if(Params.find().count() ===0){\n    \tvar items = [\n    \t\t{category:'status', active: true, content:['created', 'rejected', 'accepted', 'assigned', 'performed', 'archived']}\n    \t\t,{category:'sources', active: true, content:['fax', 'phone', 'betterstreet', 'internal', 'letter', 'other']}\n    \t];\n\t    _.each(items, function (item){\n    \t\tconsole.log (\"create params\"+item);\n\t    \tvar itemid= Params.insert(item)\n\t    })\n\t}\n",
+		"server_startup_code": "    //first run, create base application data\n\n\t// from https://www.youtube.com/watch?v=nkDBnoiLQC0 at 4:14\n    // from https://www.youtube.com/watch?v=nkDBnoiLQC0 at 4:14\n    // create users with roles\n    if(Meteor.users.find().count() ===0){\n        var users = [\n\t\t{name:'admin', email:'admin@example.com', password: 'admin', roles:['user','admin']}\n\t\t,{name:'simpleuser', email:'simpleuser@example.com', password: 'user', roles:['user']}\n    \t\t,{name:'bp', email:'euqip@github.com', password: 'bp', roles:['user','admin']}\n    \t];\n\t    _.each(users, function (user){\n    \t\tconsole.log (\"create users___\"+user.email);\n\t    \tvar userid= Accounts.createUser({\n\t    \t\temail: user.email\n\t    \t\t,password: user.password\n\t    \t\t,username: user.email\n\t    \t\t,profile:{name: user.name}\n\t    \t})\n\t    \tMeteor.users.update({_id:userid},{$set:{'emails.0.verified':true}});\n\t    \tMeteor.users.update({_id:userid},{$set:{'roles':user.roles}});\n\t    \t//Roles.addUsersToRoles(userid, user.roles);\n\t    })\n    }\n    if(Organisations.find().count() <2){\n    \tvar items = [\n    \t\t{orgname:'asset Management', email:'info@assetmgnt.com', shortname: 'assetmgnt'}\n    \t\t,{orgname:'Dummy company', email:'info@dummy.com', shortname: 'dummy'}\n    \t];\n\t    _.each(items, function (item){\n    \t\tconsole.log (\"create orgs___\"+item);\n\t    \tvar itemid= Organisations.insert(item)\n\t    })\n    }\n\n    if(Assetscat.find().count() ===0){\n    \tvar items = [\n    \t\t{catname:'buildings'}\n    \t\t,{catname:'parks'}\n    \t\t,{catname:'cars'}\n    \t\t,{catname:'machines'}\n    \t\t,{catname:'streets'}\n    \t];\n\t    _.each(items, function (item){\n    \t\tconsole.log (\"create cats___\"+item);\n\t    \tvar itemid= Assetscat.insert(item)\n\t    })\n\t}\n    if(Params.find().count() ===0){\n    \tvar items = [\n    \t\t{category:'status', active: true, content:['created', 'rejected', 'accepted', 'assigned', 'performed', 'archived']}\n    \t\t,{category:'sources', active: true, content:['fax', 'phone', 'betterstreet', 'internal', 'letter', 'other']}\n    \t];\n\t    _.each(items, function (item){\n    \t\tconsole.log (\"create params\"+item.name);\n\t    \tvar itemid= Params.insert(item)\n\t    })\n\t}\n\n    if(Theassets.find().count() ===0){\n    \tvar items = [\n    \t\t {category:'building', name: 'bldg1', pn:'1'}\n    \t\t,{category:'building', name: 'bldg2', pn:'2'}\n    \t\t,{category:'building', name: 'bldg3', pn:'3'}\n    \t];\n\t    _.each(items, function (item){\n    \t\tconsole.log (\"create Theassets \"+item.name);\n\t    \tvar itemid= Theassets.insert(item)\n\t    })\n\t}\n",
 		"server_side_routes": [
 			{
 				"name": "assets_list"
@@ -1092,6 +1175,7 @@
 			{
 				"name": "orgs_list"
 			}
-		]
+		],
+		"on_user_created_code": "// block undesirable user with a test on email domain name\n// source : https://github.com/perak/kitchen-site/issues/149\n\nif( user.emails[0].address.search( \"@approved-domain.com\") == -1 )\n         user.roles.push( \"blocked\" );\n"
 	}
 }
