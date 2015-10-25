@@ -120,20 +120,23 @@
 						"name": "category",
 						"title": "{{_ 'category'}}",
 						"type": "string",
-						"required": true
+						"required": true,
+						"exportable": true
 					},
 					{
 						"name": "content",
 						"title": "{{_ 'content'}}",
 						"type": "array",
-						"required": true
+						"required": true,
+						"exportable": true
 					},
 					{
 						"name": "active",
 						"title": "{{_ 'active'}}",
 						"type": "bool",
 						"default": "true",
-						"required": true
+						"required": true,
+						"exportable": true
 					}
 				],
 				"owner_field": "createdBy",
@@ -479,17 +482,17 @@
 									"fields": [
 										{
 											"name": "profile.name",
-											"title": "_name",
+											"title": "{{_ 'name'}}",
 											"type": "string"
 										},
 										{
 											"name": "profile.email",
-											"title": "_email",
+											"title": "{{_ 'email'}}",
 											"type": "string"
 										},
 										{
 											"name": "roles",
-											"title": "_role",
+											"title": "{{_ 'role'}}",
 											"type": "string"
 										}
 									],
@@ -553,7 +556,7 @@
 											"name": "insert_form",
 											"type": "form",
 											"mode": "insert",
-											"title": "_addnewuser",
+											"title": "{{_ 'addnewuser'}}",
 											"submit_route": "admin.users",
 											"cancel_route": "admin.users",
 											"query_name": "users_null",
@@ -592,7 +595,7 @@
 											"name": "edit_form",
 											"type": "form",
 											"mode": "update",
-											"title": "_edituser",
+											"title": "{{_ 'modify'}}",
 											"submit_route": "admin.users",
 											"cancel_route": "admin.users",
 											"query_name": "admin_user",
@@ -643,19 +646,19 @@
 								{
 									"name": "view",
 									"type": "data_view",
-									"title": "_params",
-									"text_if_empty": "No params yet defined",
+									"title": "{{_ 'appparams'}}",
+									"text_if_empty": "{{_ 'noparamsyetdefined'}}",
 									"query_name": "admin_params",
 									"fields": [
 										{
 											"name": "category",
-											"title": "_category",
+											"title": "{{_ 'category'}}",
 											"type": "string",
 											"required": true
 										},
 										{
 											"name": "active",
-											"title": "_active",
+											"title": "{{_ 'active'}}",
 											"type": "bool",
 											"default": "true",
 											"required": true,
@@ -665,7 +668,7 @@
 										},
 										{
 											"name": "content",
-											"title": "_content",
+											"title": "{{_ 'content'}}",
 											"type": "string",
 											"required": true
 										}
@@ -684,7 +687,8 @@
 											"name": "paramId",
 											"value": "this._id"
 										}
-									]
+									],
+									"insert_button_title": "{{_ 'addnew'}}"
 								}
 							],
 							"pages": [
@@ -698,7 +702,7 @@
 											"name": "details_form",
 											"type": "form",
 											"mode": "read_only",
-											"title": "_paramdetails",
+											"title": "{{_ 'modify'}}",
 											"query_name": "admin_param",
 											"fields": [
 												{
@@ -723,7 +727,8 @@
 												}
 											],
 											"close_route": "admin.params",
-											"back_route": "admin.params"
+											"back_route": "admin.params",
+											"layout": "inline"
 										}
 									],
 									"type": "page"
@@ -735,32 +740,33 @@
 											"name": "insert_form",
 											"type": "form",
 											"mode": "insert",
-											"title": "_addnewparam",
+											"title": "{{_ 'addnewparam'}}",
 											"submit_route": "admin.params",
 											"cancel_route": "admin.params",
 											"query_name": "params_null",
 											"fields": [
 												{
 													"name": "category",
-													"title": "_category",
+													"title": "{{_ 'category'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "active",
-													"title": "_active",
+													"title": "{{_ 'active'}}",
 													"required": true,
-													"type": "boolean",
-													"default": true,
+													"type": "bool",
+													"default": "true",
 													"input": "checkbox"
 												},
 												{
 													"name": "content",
-													"title": "_content",
+													"title": "{{_ 'content'}}",
 													"required": true,
-													"type": "string"
+													"type": "array"
 												}
-											]
+											],
+											"layout": "horizontal"
 										}
 									],
 									"type": "page"
@@ -775,7 +781,7 @@
 											"name": "edit_form",
 											"type": "form",
 											"mode": "update",
-											"title": "_editparam",
+											"title": "{{_ 'modify'}}",
 											"submit_route": "admin.params",
 											"cancel_route": "admin.params",
 											"query_name": "admin_param",
@@ -814,8 +820,8 @@
 								{
 									"name": "view",
 									"type": "data_view",
-									"title": "_organisations",
-									"text_if_empty": "No organisations yet defined",
+									"title": "{{_ 'organisations'}}",
+									"text_if_empty": "{{_ 'noorganisationsyetdefined'}}",
 									"query_name": "admin_organisations",
 									"fields": [
 										{
@@ -867,7 +873,7 @@
 											"name": "details_form",
 											"type": "form",
 											"mode": "read_only",
-											"title": "organisation details",
+											"title": "{{_ 'details'}}",
 											"query_name": "admin_organisation",
 											"fields": [
 												{
@@ -892,7 +898,8 @@
 												}
 											],
 											"close_route": "admin.organisations",
-											"back_route": "admin.organisations"
+											"back_route": "admin.organisations",
+											"layout": "inline"
 										}
 									],
 									"type": "page"
@@ -904,32 +911,28 @@
 											"name": "insert_form",
 											"type": "form",
 											"mode": "insert",
-											"title": "Add new organisation",
+											"title": "{{_ 'addneworganisation'}}",
 											"submit_route": "admin.organisations",
 											"cancel_route": "admin.organisations",
 											"query_name": "organisations_null",
 											"fields": [
 												{
 													"name": "orgname",
-													"title": "_name",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "shortname",
-													"title": "_shortname",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "language",
-													"title": "_language",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "email",
-													"title": "_email",
 													"type": "email",
 													"required": true
 												}
@@ -948,7 +951,7 @@
 											"name": "edit_form",
 											"type": "form",
 											"mode": "update",
-											"title": "Edit organisation",
+											"title": "{{_ 'modify'}}",
 											"submit_route": "admin.organisations",
 											"cancel_route": "admin.organisations",
 											"query_name": "admin_organisation",
@@ -1008,7 +1011,7 @@
 						}
 					],
 					"type": "page",
-					"title": "_appmanagement"
+					"title": "{{_ 'appmanagement'}}"
 				},
 				{
 					"name": "user_settings",
@@ -1078,7 +1081,7 @@
 				{
 					"name": "assets",
 					"type": "page",
-					"title": "_assets management",
+					"title": "{{_ 'assetsmanagement'}}",
 					"query_name": "theassetsslist",
 					"components": [
 						{
