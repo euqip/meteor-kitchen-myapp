@@ -162,13 +162,13 @@
 				"fields": [
 					{
 						"name": "taskname",
-						"title": "_taskname",
+						"title": "{{_ 'taskname'}}",
 						"type": "string",
 						"required": true
 					},
 					{
 						"name": "taskdescr",
-						"title": "_taskdescription",
+						"title": "{{_ 'taskdescription'}}",
 						"type": "string",
 						"required": true,
 						"searchable": false,
@@ -177,52 +177,52 @@
 					},
 					{
 						"name": "cration",
-						"title": "_creationdate",
+						"title": "{{_ 'creationdate'}}",
 						"type": "date",
 						"input": "datepicker"
 					},
 					{
 						"name": "due",
-						"title": "_duedate",
+						"title": "{{_ 'duedate'}}",
 						"type": "date",
 						"input": "datepicker"
 					},
 					{
 						"name": "recurrent",
-						"title": "_reccurent",
+						"title": "{{_ 'reccurent'}}",
 						"type": "bool",
 						"input": "checkbox"
 					},
 					{
 						"name": "period",
-						"title": "period",
+						"title": "{{_ 'period'}}",
 						"type": "integer"
 					},
 					{
 						"name": "periodunit",
-						"title": "_periodunit",
+						"title": "{{_ 'periodunit'}}",
 						"type": "string"
 					},
 					{
 						"name": "execution",
-						"title": "_execution",
+						"title": "{{_ 'execution'}}",
 						"type": "date",
 						"default": "today",
 						"input": "datepicker"
 					},
 					{
 						"name": "execBy",
-						"title": "_execby",
+						"title": "{{_ 'execby'}}",
 						"type": "string"
 					},
 					{
 						"name": "respteam",
-						"title": "_respteam",
+						"title": "{{_ 'respteam'}}",
 						"type": "string"
 					},
 					{
 						"name": "status",
-						"title": "_status",
+						"title": "{{_ 'status'}}",
 						"type": "string",
 						"default": "created",
 						"required": true,
@@ -384,11 +384,11 @@
 					"components": [
 						{
 							"name": "home_jumbotron",
-							"title": "Example application",
+							"title": "{{_ 'exampleapplication'}}",
 							"type": "jumbotron",
 							"text": "<b>This is example application built with <a href=\"http://www.meteorkitchen.com\" target=\"_blank\">meteor-kitchen</a> code generator without manual coding.</b><br />It demonstrates simple application with user account system and admin panel.<br />Source code (input file for generator) is <a href=\"https://github.com/perak/kitchen-examples/tree/master/example-admin\" target=\"_blank\">here</a>.",
-							"button_title": "Continue &raquo;",
-							"button_route": "login"
+							"button_title": "{{_ 'Continue'}} &raquo;",
+							"button_route": "{{_ 'login'}}"
 						}
 					],
 					"type": "page"
@@ -396,12 +396,14 @@
 				{
 					"name": "login",
 					"template": "login",
-					"type": "page"
+					"type": "page",
+					"custom_template": "my_login"
 				},
 				{
 					"name": "register",
 					"template": "register",
-					"type": "page"
+					"type": "page",
+					"custom_template": "my_register"
 				},
 				{
 					"name": "verify_email",
@@ -414,7 +416,8 @@
 				{
 					"name": "forgot_password",
 					"template": "forgot_password",
-					"type": "page"
+					"type": "page",
+					"custom_template": "my_forgot_password"
 				},
 				{
 					"name": "reset_password",
@@ -422,7 +425,8 @@
 					"route_params": [
 						"resetPasswordToken"
 					],
-					"type": "page"
+					"type": "page",
+					"custom_template": "my_reset_password"
 				}
 			],
 			"components": [
@@ -476,8 +480,8 @@
 								{
 									"name": "view",
 									"type": "data_view",
-									"title": "_users",
-									"text_if_empty": "No users yet",
+									"title": "{{_ 'users'}}",
+									"text_if_empty": "{{_ 'nousersyet'}}",
 									"query_name": "admin_users",
 									"fields": [
 										{
@@ -510,7 +514,8 @@
 											"name": "userId",
 											"value": "this._id"
 										}
-									]
+									],
+									"insert_button_title": "{{_ 'addnew'}}"
 								}
 							],
 							"pages": [
@@ -524,22 +529,22 @@
 											"name": "details_form",
 											"type": "form",
 											"mode": "read_only",
-											"title": "_userdetails",
+											"title": "{{_ 'userdetails'}}",
 											"query_name": "admin_user",
 											"fields": [
 												{
 													"name": "profile.name",
-													"title": "_name",
+													"title": "{{_ 'name'}}",
 													"type": "string"
 												},
 												{
 													"name": "profile.email",
-													"title": "_email",
+													"title": "{{_ 'email'}}",
 													"type": "email"
 												},
 												{
 													"name": "roles",
-													"title": "_role",
+													"title": "{{_ 'role'}}",
 													"type": "string"
 												}
 											],
@@ -563,19 +568,19 @@
 											"fields": [
 												{
 													"name": "profile.name",
-													"title": "_name",
+													"title": "{{_ 'name'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "profile.email",
-													"title": "_email",
+													"title": "{{_ 'email'}}",
 													"type": "email",
 													"required": true
 												},
 												{
 													"name": "password",
-													"title": "_password",
+													"title": "{{_ 'password'}}",
 													"input": "password",
 													"required": true,
 													"type": "string"
@@ -602,33 +607,33 @@
 											"fields": [
 												{
 													"name": "profile.name",
-													"title": "_name",
+													"title": "{{_ 'name'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "profile.email",
-													"title": "_email",
+													"title": "{{_ 'email'}}",
 													"type": "email",
 													"required": true
 												},
 												{
 													"name": "roles",
 													"type": "array",
-													"title": "_role",
+													"title": "{{_ 'role'}}",
 													"input": "radio",
 													"input_items": [
 														{
 															"value": "user",
-															"title": "_user"
+															"title": "{{_ 'user'}}"
 														},
 														{
 															"value": "admin",
-															"title": "_admin"
+															"title": "{{_ 'admin'}}"
 														},
 														{
 															"value": "blocked",
-															"title": "_blocked"
+															"title": "{{_ 'blocked'}}"
 														}
 													]
 												}
@@ -707,13 +712,13 @@
 											"fields": [
 												{
 													"name": "category",
-													"title": "_category",
+													"title": "{{_ 'category'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "active",
-													"title": "_active",
+													"title": "{{_ 'active'}}",
 													"required": true,
 													"type": "boolean",
 													"default": true,
@@ -721,7 +726,7 @@
 												},
 												{
 													"name": "content",
-													"title": "_content",
+													"title": "{{_ 'content'}}",
 													"required": true,
 													"type": "string"
 												}
@@ -788,13 +793,13 @@
 											"fields": [
 												{
 													"name": "category",
-													"title": "_category",
+													"title": "{{_ 'category'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "active",
-													"title": "_active",
+													"title": "{{_ 'active'}}",
 													"required": true,
 													"type": "boolean",
 													"default": true,
@@ -802,7 +807,7 @@
 												},
 												{
 													"name": "content",
-													"title": "_content",
+													"title": "{{_ 'content'}}",
 													"required": true,
 													"type": "string"
 												}
@@ -826,22 +831,22 @@
 									"fields": [
 										{
 											"name": "orgname",
-											"title": "_name",
+											"title": "{{_ 'name'}}",
 											"type": "string"
 										},
 										{
 											"name": "shortname",
-											"title": "_shortname",
+											"title": "{{_ 'shortname'}}",
 											"type": "string"
 										},
 										{
 											"name": "language",
-											"title": "_language",
+											"title": "{{_ 'language'}}",
 											"type": "string"
 										},
 										{
 											"name": "email",
-											"title": "_email",
+											"title": "{{_ 'email'}}",
 											"type": "string"
 										}
 									],
@@ -859,7 +864,8 @@
 											"name": "organisationId",
 											"value": "this._id"
 										}
-									]
+									],
+									"insert_button_title": "{{_ 'addnew'}}"
 								}
 							],
 							"pages": [
@@ -878,22 +884,22 @@
 											"fields": [
 												{
 													"name": "orgname",
-													"title": "_name",
+													"title": "{{_ 'name'}}",
 													"type": "string"
 												},
 												{
 													"name": "shortname",
-													"title": "_shortname",
+													"title": "{{_ 'shortname'}}",
 													"type": "string"
 												},
 												{
 													"name": "language",
-													"title": "_language",
+													"title": "{{_ 'language'}}",
 													"type": "string"
 												},
 												{
 													"name": "email",
-													"title": "_email",
+													"title": "{{_ 'email'}}",
 													"type": "email"
 												}
 											],
@@ -918,21 +924,25 @@
 											"fields": [
 												{
 													"name": "orgname",
+													"title": "{{_ 'orgname'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "shortname",
+													"title": "{{_ 'shortname'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "language",
+													"title": "{{_ 'language'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "email",
+													"title": "{{_ 'email'}}",
 													"type": "email",
 													"required": true
 												}
@@ -958,25 +968,25 @@
 											"fields": [
 												{
 													"name": "orgname",
-													"title": "_name",
+													"title": "{{_ 'name'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "shortname",
-													"title": "_shortname",
+													"title": "{{_ 'shortname'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "language",
-													"title": "_language",
+													"title": "{{_ 'language'}}",
 													"required": true,
 													"type": "string"
 												},
 												{
 													"name": "email",
-													"title": "_email",
+													"title": "{{_ 'email'}}",
 													"type": "email",
 													"required": true
 												}
@@ -1027,19 +1037,19 @@
 									"name": "edit_form",
 									"type": "form",
 									"mode": "update",
-									"title": "_editprofile",
+									"title": "{{_ 'editprofile'}}",
 									"submit_route": "user_settings.profile",
 									"query_name": "current_user_data",
 									"fields": [
 										{
 											"name": "profile.name",
-											"title": "_name",
+											"title": "{{_ 'name'}}",
 											"required": true,
 											"type": "string"
 										},
 										{
 											"name": "profile.email",
-											"title": "_email",
+											"title": "{{_ 'email'}}",
 											"type": "email",
 											"required": true
 										}
@@ -1051,7 +1061,9 @@
 						{
 							"name": "change_pass",
 							"template": "change_pass",
-							"type": "page"
+							"type": "page",
+							"title": "{{_ 'changepassword'}}",
+							"title_icon_class": "fa fa-key"
 						}
 					],
 					"components": [
@@ -1061,11 +1073,11 @@
 							"class": "nav nav-stacked nav-pills",
 							"items": [
 								{
-									"title": "_profile",
+									"title": "{{_ 'profile'}}",
 									"route": "user_settings.profile"
 								},
 								{
-									"title": "_changepassword",
+									"title": "{{_ 'changepassword'}}",
 									"route": "user_settings.change_pass"
 								}
 							]
@@ -1131,7 +1143,7 @@
 					"dest_selector": "#menu",
 					"items": [
 						{
-							"title": "{{_ '_admin'}}",
+							"title": "{{_ '_ admin'}}",
 							"route": "admin",
 							"icon_class": "fa fa-wrench"
 						},
