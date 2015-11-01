@@ -1,6 +1,6 @@
 {
 	"application": {
-		"title": "{{_ 'myapp'}}",
+		"title": "myapp",
 		"theme": "bootswatch-united",
 		"roles": [
 			"admin",
@@ -397,27 +397,27 @@
 					"name": "login",
 					"template": "login",
 					"type": "page",
-					"custom_template": "my_login"
+					"custom_template": "addons/my_login"
 				},
 				{
 					"name": "register",
 					"template": "register",
 					"type": "page",
-					"custom_template": "my_register"
+					"custom_template": "addons/my_register"
 				},
 				{
 					"name": "verify_email",
-					"template": "verify_email",
 					"route_params": [
 						"verifyEmailToken"
 					],
-					"type": "page"
+					"type": "page",
+					"custom_template": "addons/my_verify_email"
 				},
 				{
 					"name": "forgot_password",
 					"template": "forgot_password",
 					"type": "page",
-					"custom_template": "my_forgot_password"
+					"custom_template": "addons/my_forgot_password"
 				},
 				{
 					"name": "reset_password",
@@ -426,7 +426,7 @@
 						"resetPasswordToken"
 					],
 					"type": "page",
-					"custom_template": "my_reset_password"
+					"custom_template": "addons/my_reset_password"
 				}
 			],
 			"components": [
@@ -1191,6 +1191,12 @@
 				"name": "orgs_list"
 			}
 		],
-		"on_user_created_code": "// block undesirable user with a test on email domain name\n// source : https://github.com/perak/kitchen-site/issues/149\n\nif( user.emails[0].address.search( \"@approved-domain.com\") == -1 )\n         user.roles.push( \"blocked\" );\n"
+		"on_user_created_code": "// block undesirable user with a test on email domain name\n// source : https://github.com/perak/kitchen-site/issues/149\n\nif( user.emails[0].address.search( \"@approved-domain.com\") == -1 )\n         user.roles.push( \"blocked\" );\n",
+		"copy_files": [
+			{
+				"source": "files/entity.json",
+				"dest": "PRIVATE_DIR/entity.json"
+			}
+		]
 	}
 }
