@@ -1,0 +1,26 @@
+{
+	"entity": {
+		"name": "Entity name",
+		"address": "Entity address",
+		"zip": "zipcode",
+		"city": "cityname",
+		"state": "",
+		"country": "countryname",
+		"assets": {
+			"buildings":{
+
+			},
+			"cars":{
+
+			},
+			"machines":{
+
+			},
+			"parks":{
+				
+			}
+
+		}
+
+	}
+}
