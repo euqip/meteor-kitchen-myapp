@@ -12,6 +12,7 @@ Meteor kitchen builds a Meteor app with some collections
 
 - default admin: UID: admin@example.com / PWD: admin
 - default user: UID: simpleuser@example.com / PWD: user
+- this application uses tap:i18n module to translate templates, the example shows it in french.
 
 NB: prerequisites: nodejs, meteor, meteor-kithen (see: http://www.meteorkitchen.com/)
 
