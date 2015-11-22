@@ -1196,7 +1196,12 @@
 			{
 				"source": "files/entity.json",
 				"dest": "PRIVATE_DIR/entity.json"
+			},
+			{
+				"source": "files/i18n/fr.i18n.json",
+				"dest": "LIB_DIR/i18n/fr.i18n.json"
 			}
+			
 		]
 	}
 }
